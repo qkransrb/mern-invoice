@@ -3,7 +3,11 @@ import chalk from "chalk";
 import cookieParser from "cookie-parser";
 import express from "express";
 import morgan from "morgan";
+
+import connection from "./config/connectDB.js";
 import { morganMiddleware, systemLogs } from "./utils/Logger.js";
+
+await connection();
 
 const app = express();
 
