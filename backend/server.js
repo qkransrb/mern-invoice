@@ -14,6 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.get("/api/v1/test", (_, res) => {
+  return res.json({ message: "Welcome to the Invoice App!!" });
+});
+
 app.listen(PORT, () => {
   console.log(
     `${chalk.green.bold("✔")} 👍 Server running in ${chalk.yellow.bold(
