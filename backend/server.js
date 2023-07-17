@@ -7,6 +7,7 @@ import mongoSanitize from "express-mongo-sanitize";
 
 import connection from "./config/connectDB.js";
 import { morganMiddleware, systemLogs } from "./utils/Logger.js";
+import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 
 await connection();
 
@@ -25,6 +26,9 @@ app.use(morganMiddleware);
 app.get("/api/v1/test", (_, res) => {
   return res.json({ message: "Welcome to the Invoice App!!" });
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(
