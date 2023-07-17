@@ -3,6 +3,7 @@ import chalk from "chalk";
 import cookieParser from "cookie-parser";
 import express from "express";
 import morgan from "morgan";
+import mongoSanitize from "express-mongo-sanitize";
 
 import connection from "./config/connectDB.js";
 import { morganMiddleware, systemLogs } from "./utils/Logger.js";
@@ -18,7 +19,7 @@ app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(mongoSanitize());
 app.use(morganMiddleware);
 
 app.get("/api/v1/test", (_, res) => {
